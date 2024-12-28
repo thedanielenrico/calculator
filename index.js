@@ -28,8 +28,10 @@ let result = null;
 equalBtn.addEventListener("click", () => {
   numberToDisplay = "";
   displayOutput.textContent = numberToDisplay;
-
-  console.log("hello", { firstNum, secondNum, currentOperator });
+  result = operations[currentOperator](firstNum, secondNum);
+  firstNum = result;
+  numberToDisplay = result;
+  displayOutput.textContent = numberToDisplay;
 });
 
 clearAllBtn.addEventListener("click", () => {
@@ -61,11 +63,14 @@ numbers.forEach((num) => {
 });
 
 operators.forEach((operator) => {
-  operator.addEventListener("click", () => {
-    currentOperator = operator.id;
-  });
+  if (operator.id !== "equal-btn") {
+    operator.addEventListener("click", () => {
+      currentOperator = operator.id;
+    });
+  }
 });
 
-// step 1: display number to display
-// step 2: track operator click
-// only allow one decimal place
+// display first number and store it in a variable
+// select an operator and store it in a variable
+// select and display second number, stor it in a variable
+// once equal button is clicked, do the math
