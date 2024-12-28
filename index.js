@@ -29,6 +29,7 @@ equalBtn.addEventListener("click", () => {
   numberToDisplay = "";
   displayOutput.textContent = numberToDisplay;
   result = operations[currentOperator](firstNum, secondNum);
+  console.log("~~~~~", currentOperator);
   firstNum = result;
   numberToDisplay = result;
   displayOutput.textContent = numberToDisplay;
@@ -50,7 +51,7 @@ numbers.forEach((num) => {
       displayOutput.textContent = numberToDisplay;
       if (currentOperator === "") {
         firstNum = Number(numberToDisplay);
-      } else if (secondNum === null && currentOperator !== "") {
+      } else {
         numberToDisplay = num.textContent;
         displayOutput.textContent = numberToDisplay;
         secondNum = Number(numberToDisplay);
