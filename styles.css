@@ -17,6 +17,8 @@ body {
   width: 100%;
   border: 4px solid darkblue;
   box-sizing: border-box;
+  font-size: 66px;
+  text-align: right;
 }
 
 #inputs {
