@@ -41,6 +41,7 @@ clearAllBtn.addEventListener("click", () => {
   secondNum = null;
   result = null;
   displayOutput.textContent = numberToDisplay;
+  updateActiveOperator("");
 });
 
 numbers.forEach((num) => {
@@ -65,11 +66,18 @@ numbers.forEach((num) => {
 operators.forEach((operator) => {
   if (operator.id !== "equal-btn") {
     operator.addEventListener("click", () => {
+      updateActiveOperator(operator);
       currentOperator = operator.id;
     });
   }
 });
-
+function updateActiveOperator(op) {
+  operators.forEach((operator) => {
+    operator.id !== op.id
+      ? operator.classList.remove("active")
+      : operator.classList.add("active");
+  });
+}
 // display first number and store it in a variable
 // select an operator and store it in a variable
 // select and display second number, stor it in a variable
