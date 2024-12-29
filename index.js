@@ -3,6 +3,7 @@ const clearAllBtn = document.getElementById("all-clear-btn");
 const numbers = Array.from(document.getElementsByClassName("number"));
 const operators = Array.from(document.getElementsByClassName("operator input"));
 const equalBtn = document.getElementById("equal-btn");
+const percentageBtn = document.getElementById("percentage-btn");
 
 const operations = {
   addition: function (a, b) {
@@ -32,6 +33,7 @@ equalBtn.addEventListener("click", () => {
   firstNum = result;
   numberToDisplay = result;
   displayOutput.textContent = numberToDisplay;
+  updateActiveOperator("");
 });
 
 clearAllBtn.addEventListener("click", () => {
@@ -71,6 +73,7 @@ operators.forEach((operator) => {
     });
   }
 });
+
 function updateActiveOperator(op) {
   operators.forEach((operator) => {
     operator.id !== op.id
@@ -78,6 +81,13 @@ function updateActiveOperator(op) {
       : operator.classList.add("active");
   });
 }
+
+percentageBtn.addEventListener("click", () => {
+  numberToDisplay = Number(numberToDisplay) * 0.01;
+  firstNum = numberToDisplay;
+  displayOutput.textContent = numberToDisplay;
+});
+
 // display first number and store it in a variable
 // select an operator and store it in a variable
 // select and display second number, stor it in a variable
