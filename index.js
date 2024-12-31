@@ -4,6 +4,7 @@ const numbers = Array.from(document.getElementsByClassName("number"));
 const operators = Array.from(document.getElementsByClassName("operator input"));
 const equalBtn = document.getElementById("equal-btn");
 const percentageBtn = document.getElementById("percentage-btn");
+const decimalBtn = document.getElementById("decimal-btn");
 
 const operations = {
   addition: function (a, b) {
@@ -48,30 +49,23 @@ clearAllBtn.addEventListener("click", () => {
 
 numbers.forEach((num) => {
   num.addEventListener("click", () => {
-    if (!num.id) {
-      numberToDisplay += num.textContent;
+    numberToDisplay += num.textContent;
+    displayOutput.textContent = numberToDisplay;
+    if (currentOperator === "") {
+      firstNum = Number(numberToDisplay);
+    } else {
+      numberToDisplay = num.textContent;
       displayOutput.textContent = numberToDisplay;
-      if (currentOperator === "") {
-        firstNum = Number(numberToDisplay);
-      } else {
-        numberToDisplay = num.textContent;
-        displayOutput.textContent = numberToDisplay;
-        secondNum = Number(numberToDisplay);
-      }
-    } else if (num.id === "decimal" && !numberToDisplay.includes(".")) {
-      numberToDisplay += num.textContent;
-      displayOutput.textContent = numberToDisplay;
+      secondNum = Number(numberToDisplay);
     }
   });
 });
 
 operators.forEach((operator) => {
-  if (operator.id !== "equal-btn") {
-    operator.addEventListener("click", () => {
-      updateActiveOperator(operator);
-      currentOperator = operator.id;
-    });
-  }
+  operator.addEventListener("click", () => {
+    updateActiveOperator(operator);
+    currentOperator = operator.id;
+  });
 });
 
 function updateActiveOperator(op) {
@@ -88,7 +82,14 @@ percentageBtn.addEventListener("click", () => {
   displayOutput.textContent = numberToDisplay;
 });
 
-// display first number and store it in a variable
-// select an operator and store it in a variable
-// select and display second number, stor it in a variable
-// once equal button is clicked, do the math
+decimalBtn.addEventListener("click", () => {
+  if (!numberToDisplay.includes(".")) {
+    numberToDisplay = `${numberToDisplay}.`;
+    displayOutput.textContent = numberToDisplay;
+  }
+});
+
+// BUG: complete one operation, proceed to start a new operation.
+// OUTCOME: the preceding result is operated on
+// DESIRE: the previous data should be cleared if a number is clicked after an operation
+// Allow for coninous equal-btn clicking however
