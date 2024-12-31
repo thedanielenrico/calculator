@@ -25,15 +25,14 @@ let numberToDisplay = "";
 let currentOperator = "";
 let firstNum = null;
 let secondNum = null;
-let result = null;
 
 equalBtn.addEventListener("click", () => {
   numberToDisplay = "";
   displayOutput.textContent = numberToDisplay;
-  result = operations[currentOperator](firstNum, secondNum);
-  firstNum = result;
+  const result = operations[currentOperator](result || firstNum, secondNum);
   numberToDisplay = result;
   displayOutput.textContent = numberToDisplay;
+
   updateActiveOperator("");
 });
 
@@ -42,7 +41,6 @@ clearAllBtn.addEventListener("click", () => {
   currentOperator = "";
   firstNum = null;
   secondNum = null;
-  result = null;
   displayOutput.textContent = numberToDisplay;
   updateActiveOperator("");
 });
